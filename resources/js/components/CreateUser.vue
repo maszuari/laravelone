@@ -33,7 +33,9 @@
     export default {
         data(){
         return {
-          user:{},
+          user:{
+              status:false
+          },
           allerros: []
         }
     },

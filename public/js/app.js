@@ -1915,7 +1915,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      user: {},
+      user: {
+        status: false
+      },
       allerros: []
     };
   },
@@ -1964,9 +1966,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    return {
+      user: {},
+      allerros: []
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    var uri = "http://laravelone.test/api/user/edit/".concat(this.$route.params.id);
+    this.axios.get(uri).then(function (response) {
+      _this.user = response.data;
+    });
+  },
+  methods: {
+    updateUser: function updateUser() {
+      var _this2 = this;
+
+      var uri = "http://laravelone.test/api/user/update/".concat(this.$route.params.id);
+      this.axios.post(uri, this.user).then(function (response) {
+        _this2.$router.push({
+          name: 'users'
+        });
+      })["catch"](function (error) {
+        //console.log(error.response)
+        _this2.allerros = error.response.data.errors;
+        console.log(_this2.allerros);
+      });
+    }
   }
 });
 
@@ -2049,6 +2095,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2062,6 +2131,18 @@ __webpack_require__.r(__webpack_exports__);
     this.axios.get(uri).then(function (response) {
       _this.users = response.data.data;
     });
+  },
+  methods: {
+    deleteUser: function deleteUser(id, index) {
+      console.log("id: ", id);
+      console.log("index: ", index); //TODO : Test this.
+
+      /*let uri = `http://laravelone.test/api/user/delete/${id}`;
+      this.axios.delete(uri).then(response => {
+          this.users.splice(this.users.indexOf(index), 1);
+      });
+      */
+    }
   }
 });
 
@@ -20387,8 +20468,8 @@ var render = function() {
               [
                 _c(
                   "router-link",
-                  { staticClass: "nav-link", attrs: { to: "/table" } },
-                  [_vm._v("Table")]
+                  { staticClass: "nav-link", attrs: { to: "/Users" } },
+                  [_vm._v("Users")]
                 )
               ],
               1
@@ -20614,28 +20695,174 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("Edit user")]),
+  return _c("div", [
+    _c("h1", [_vm._v("Edit a User")]),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.updateUser($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+            _vm._v("Email address")
+          ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v(
-              "\n                I'm the Edit user component.\n            "
-            )
-          ])
-        ])
-      ])
-    ])
-  }
-]
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.user.email,
+                expression: "user.email"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "email", placeholder: "Enter email" },
+            domProps: { value: _vm.user.email },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.user, "email", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "small",
+            { staticClass: "form-text text-muted", attrs: { id: "emailHelp" } },
+            [_vm._v("We'll never share your email with anyone else.")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("First name")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.user.firstname,
+                expression: "user.firstname"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Enter first name" },
+            domProps: { value: _vm.user.firstname },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.user, "firstname", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Last name")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.user.lastname,
+                expression: "user.lastname"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Enter last name" },
+            domProps: { value: _vm.user.lastname },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.user, "lastname", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group form-check" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.user.status,
+                expression: "user.status"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { type: "checkbox", value: "", id: "defaultCheck1" },
+            domProps: {
+              checked: Array.isArray(_vm.user.status)
+                ? _vm._i(_vm.user.status, "") > -1
+                : _vm.user.status
+            },
+            on: {
+              change: function($event) {
+                var $$a = _vm.user.status,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false
+                if (Array.isArray($$a)) {
+                  var $$v = "",
+                    $$i = _vm._i($$a, $$v)
+                  if ($$el.checked) {
+                    $$i < 0 && _vm.$set(_vm.user, "status", $$a.concat([$$v]))
+                  } else {
+                    $$i > -1 &&
+                      _vm.$set(
+                        _vm.user,
+                        "status",
+                        $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                      )
+                  }
+                } else {
+                  _vm.$set(_vm.user, "status", $$c)
+                }
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "form-check-label",
+              attrs: { for: "defaultCheck1" }
+            },
+            [
+              _vm._v(
+                "\n              Status: " +
+                  _vm._s(_vm.user.status ? "Active" : "Inactive") +
+                  "\n          "
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Submit")]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -20702,7 +20929,7 @@ var render = function() {
     _c("h1", [_vm._v("Users")]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-10" }),
+      _vm._m(0),
       _vm._v(" "),
       _c(
         "div",
@@ -20723,11 +20950,11 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("table", { staticClass: "table table-hover" }, [
-      _vm._m(0),
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.users, function(user) {
+        _vm._l(_vm.users, function(user, index) {
           return _c("tr", { key: user.id }, [
             _c("td", [_vm._v(_vm._s(user.id))]),
             _vm._v(" "),
@@ -20737,7 +20964,9 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(user.lastname))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(user.status))]),
+            _c("td", [
+              _vm._v(_vm._s(user.status == 1 ? "Active" : "Inactive"))
+            ]),
             _vm._v(" "),
             _c(
               "td",
@@ -20754,7 +20983,21 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _vm._m(1, true)
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.deleteUser(user.id, index)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              )
+            ])
           ])
         }),
         0
@@ -20763,6 +21006,60 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-10" }, [
+      _c("form", [
+        _c("div", { staticClass: "form-row align-items-center" }, [
+          _c("div", { staticClass: "col-auto" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Email" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-auto" }, [
+            _c(
+              "select",
+              {
+                staticClass: "custom-select my-1 mr-sm-2",
+                attrs: { id: "inlineFormCustomSelectPref" }
+              },
+              [
+                _c("option", { attrs: { selected: "", value: "true" } }, [
+                  _vm._v("Active")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "false" } }, [
+                  _vm._v("Inactive")
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-auto" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "First name" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-auto" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Last name" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-auto" }, [
+            _c("button", { staticClass: "btn btn-success" }, [_vm._v("Search")])
+          ])
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -20783,14 +21080,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Delete")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Delete")])
     ])
   }
 ]

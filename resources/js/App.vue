@@ -9,7 +9,7 @@
           <router-link to="/create" class="nav-link">Create User</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/table" class="nav-link">Table</router-link>
+          <router-link to="/Users" class="nav-link">Users</router-link>
         </li>
       </ul>
     </nav><br />
