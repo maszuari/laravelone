@@ -2,10 +2,10 @@
   <div class="row justify-content-center">
       <div class="col-md-8">
           <div class="card card-default">
-              <div class="card-header">Create user</div>
+              <div class="card-header">Edit user</div>
 
               <div class="card-body">
-                  I'm the Create user component.
+                  I'm the Edit user component.
               </div>
           </div>
       </div>
