@@ -33,12 +33,22 @@
     export default {
         data(){
         return {
-          user:{}
+          user:{},
+          allerros: []
         }
     },
     methods: {
       addUser(){
         console.log(this.user);
+            let uri = 'http://laravelone.test/api/user/create';
+            this.axios.post(uri, this.user).then((response) => {
+            this.$router.push({name: 'users'});
+          }).catch((error) => {
+                //console.log(error.response)
+                this.allerros = error.response.data.errors;
+                console.log(this.allerros)
+                this.success = false;
+          });
       }
     }
   }

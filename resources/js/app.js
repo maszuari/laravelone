@@ -15,7 +15,7 @@ Vue.use(VueAxios, axios);
 
 import Home from './components/Home.vue';
 import CreateUser from './components/CreateUser.vue';
-import Table from './components/Table.vue';
+import Users from './components/Users.vue';
 import EditUser from './components/EditUser.vue';
 
 const routes = [
@@ -30,9 +30,9 @@ const routes = [
         component: CreateUser
     },
     {
-        name: 'table',
-        path: '/table',
-        component: Table
+        name: 'users',
+        path: '/users',
+        component: Users
     },
     {
         name: 'edit',
