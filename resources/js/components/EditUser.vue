@@ -10,14 +10,14 @@
 
          <div class="form-group">
             <label>First name</label>
-            <input type="text" class="form-control" placeholder="Enter first name" v-model="user.firstname">
-            <small v-if="allerros.firstname" class="form-text text-danger">{{ allerros.firstname[0] }}</small>
+            <input type="text" class="form-control" placeholder="Enter first name" v-model="user.first_name">
+            <small v-if="allerros.first_name" class="form-text text-danger">{{ allerros.first_name[0] }}</small>
         </div>
 
         <div class="form-group">
             <label>Last name</label>
-            <input type="text" class="form-control" placeholder="Enter last name" v-model="user.lastname">
-             <small v-if="allerros.lastname" class="form-text text-danger">{{ allerros.lastname[0] }}</small>
+            <input type="text" class="form-control" placeholder="Enter last name" v-model="user.last_name">
+             <small v-if="allerros.last_name" class="form-text text-danger">{{ allerros.last_name[0] }}</small>
         </div>
 
         <div class="form-group form-check">
@@ -53,7 +53,7 @@
 
             this.user.status = this.status===true?'active':'inactive';
             console.log(this.user)
-            
+
             let uri = `http://laravelone.test/api/user/update/${this.$route.params.id}`;
             this.axios.post(uri, this.user).then((response) => {
                 this.$router.push({name: 'users'});

@@ -10,7 +10,7 @@ class UserFilter extends AbstractFilter{
     protected $filters = [
         'email' => EmailFilter::class,
         'status' => StatusFilter::class,
-        'firstname' => FirstNameFilter::class,
-        'lastname' => LastNameFilter::class
+        'first_name' => FirstNameFilter::class,
+        'last_name' => LastNameFilter::class
     ];
 }

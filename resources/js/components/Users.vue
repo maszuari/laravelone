@@ -23,10 +23,10 @@
                             </select>
                         </div>
                         <div class="col-auto">
-                            <input type="text" class="form-control" placeholder="First name" v-model="filter.firstname">
+                            <input type="text" class="form-control" placeholder="First name" v-model="filter.first_name">
                         </div>
                         <div class="col-auto">
-                            <input type="text" class="form-control" placeholder="Last name" v-model="filter.lastname">
+                            <input type="text" class="form-control" placeholder="Last name" v-model="filter.last_name">
                         </div>
                         <div class="col-auto">
                             <button class="btn btn-success">Search</button>
@@ -55,8 +55,8 @@
                 <tr v-for="(user, index) in users" :key="user.id">
                     <td>{{ user.id }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.firstname }}</td>
-                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
                     <td>{{ user.status=='active'?'Active':'Inactive' }}</td>
                     <td><router-link :to="{name: 'edit', params: { id: user.id }}" class="btn btn-primary">Edit</router-link></td>
                     <td><button class="btn btn-danger" @click.prevent="deleteUser(user.id, index)">Delete</button></td>
@@ -74,8 +74,8 @@
             filter:{
                 email:'',
                 status:'none',
-                firstname:'',
-                lastname:''
+                first_name:'',
+                last_name:''
             }
         }
     },

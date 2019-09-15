@@ -10,13 +10,13 @@
 
          <div class="form-group">
             <label>First name</label>
-            <input type="text" class="form-control" placeholder="Enter first name" v-model="user.firstname">
+            <input type="text" class="form-control" placeholder="Enter first name" v-model="user.first_name">
             <small v-if="allerros.firstname" class="form-text text-danger">{{ allerros.firstname[0] }}</small>
         </div>
 
         <div class="form-group">
             <label>Last name</label>
-            <input type="text" class="form-control" placeholder="Enter last name" v-model="user.lastname">
+            <input type="text" class="form-control" placeholder="Enter last name" v-model="user.last_name">
             <small v-if="allerros.lastname" class="form-text text-danger">{{ allerros.lastname[0] }}</small>
         </div>
 

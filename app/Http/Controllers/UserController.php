@@ -13,15 +13,15 @@ class UserController extends Controller
 
       $request->validate([
           'email' => 'required|email:rfc,dns',
-          'firstname' => 'required',
-          'lastname' => 'required',
+          'first_name' => 'required',
+          'last_name' => 'required',
           'status' => 'required'
       ]);
 
       $user = new User([
         'email' => $request->get('email'),
-        'firstname' => $request->get('firstname'),
-        'lastname' => $request->get('lastname'),
+        'first_name' => $request->get('first_name'),
+        'last_name' => $request->get('last_name'),
         'status' => $request->get('status')
       ]);
 
@@ -45,8 +45,8 @@ class UserController extends Controller
       $request->validate([
           'id' => 'required',
           'email' => 'required|email:rfc,dns',
-          'firstname' => 'required',
-          'lastname' => 'required',
+          'first_name' => 'required',
+          'last_name' => 'required',
           'status' => 'required'
       ]);
 

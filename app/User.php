@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class User extends Model
 {
-    protected $fillable = ['email','firstname','lastname','status'];
+    protected $fillable = ['email','first_name','last_name','status'];
 
     public function scopeFilter(Builder $builder, $request)
     {

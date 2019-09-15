@@ -2144,8 +2144,8 @@ __webpack_require__.r(__webpack_exports__);
       filter: {
         email: '',
         status: 'none',
-        firstname: '',
-        lastname: ''
+        first_name: '',
+        last_name: ''
       }
     };
   },
@@ -20624,19 +20624,19 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.user.firstname,
-                expression: "user.firstname"
+                value: _vm.user.first_name,
+                expression: "user.first_name"
               }
             ],
             staticClass: "form-control",
             attrs: { type: "text", placeholder: "Enter first name" },
-            domProps: { value: _vm.user.firstname },
+            domProps: { value: _vm.user.first_name },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.user, "firstname", $event.target.value)
+                _vm.$set(_vm.user, "first_name", $event.target.value)
               }
             }
           }),
@@ -20656,19 +20656,19 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.user.lastname,
-                expression: "user.lastname"
+                value: _vm.user.last_name,
+                expression: "user.last_name"
               }
             ],
             staticClass: "form-control",
             attrs: { type: "text", placeholder: "Enter last name" },
-            domProps: { value: _vm.user.lastname },
+            domProps: { value: _vm.user.last_name },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.user, "lastname", $event.target.value)
+                _vm.$set(_vm.user, "last_name", $event.target.value)
               }
             }
           }),
@@ -20823,26 +20823,26 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.user.firstname,
-                expression: "user.firstname"
+                value: _vm.user.first_name,
+                expression: "user.first_name"
               }
             ],
             staticClass: "form-control",
             attrs: { type: "text", placeholder: "Enter first name" },
-            domProps: { value: _vm.user.firstname },
+            domProps: { value: _vm.user.first_name },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.user, "firstname", $event.target.value)
+                _vm.$set(_vm.user, "first_name", $event.target.value)
               }
             }
           }),
           _vm._v(" "),
-          _vm.allerros.firstname
+          _vm.allerros.first_name
             ? _c("small", { staticClass: "form-text text-danger" }, [
-                _vm._v(_vm._s(_vm.allerros.firstname[0]))
+                _vm._v(_vm._s(_vm.allerros.first_name[0]))
               ])
             : _vm._e()
         ]),
@@ -20855,26 +20855,26 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.user.lastname,
-                expression: "user.lastname"
+                value: _vm.user.last_name,
+                expression: "user.last_name"
               }
             ],
             staticClass: "form-control",
             attrs: { type: "text", placeholder: "Enter last name" },
-            domProps: { value: _vm.user.lastname },
+            domProps: { value: _vm.user.last_name },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.user, "lastname", $event.target.value)
+                _vm.$set(_vm.user, "last_name", $event.target.value)
               }
             }
           }),
           _vm._v(" "),
-          _vm.allerros.lastname
+          _vm.allerros.last_name
             ? _c("small", { staticClass: "form-text text-danger" }, [
-                _vm._v(_vm._s(_vm.allerros.lastname[0]))
+                _vm._v(_vm._s(_vm.allerros.last_name[0]))
               ])
             : _vm._e()
         ]),
@@ -21160,19 +21160,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.filter.firstname,
-                      expression: "filter.firstname"
+                      value: _vm.filter.first_name,
+                      expression: "filter.first_name"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text", placeholder: "First name" },
-                  domProps: { value: _vm.filter.firstname },
+                  domProps: { value: _vm.filter.first_name },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.filter, "firstname", $event.target.value)
+                      _vm.$set(_vm.filter, "first_name", $event.target.value)
                     }
                   }
                 })
@@ -21184,19 +21184,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.filter.lastname,
-                      expression: "filter.lastname"
+                      value: _vm.filter.last_name,
+                      expression: "filter.last_name"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text", placeholder: "Last name" },
-                  domProps: { value: _vm.filter.lastname },
+                  domProps: { value: _vm.filter.last_name },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.filter, "lastname", $event.target.value)
+                      _vm.$set(_vm.filter, "last_name", $event.target.value)
                     }
                   }
                 })
@@ -21237,9 +21237,9 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(user.email))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(user.firstname))]),
+            _c("td", [_vm._v(_vm._s(user.first_name))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(user.lastname))]),
+            _c("td", [_vm._v(_vm._s(user.last_name))]),
             _vm._v(" "),
             _c("td", [
               _vm._v(_vm._s(user.status == "active" ? "Active" : "Inactive"))
