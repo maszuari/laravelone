@@ -26,7 +26,8 @@
                 Status: {{status?'Active':'Inactive'}}
             </label>
         </div>
-         <button type="submit" class="btn btn-primary">Submit</button>
+        <button v-if="loading" type="submit" class="btn btn-primary" disabled>Loading...</button>
+        <button v-else type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </template>
@@ -37,7 +38,8 @@
         return {
             status:false,
             user:{},
-            allerros: []
+            allerros: [],
+            loading: false
         }
     },
     created(){
@@ -50,15 +52,17 @@
     },
     methods: {
         updateUser() {
-
+            this.loading = true;
             this.user.status = this.status===true?'active':'inactive';
             console.log(this.user)
 
             let uri = `http://laravelone.test/api/user/update/${this.$route.params.id}`;
             this.axios.post(uri, this.user).then((response) => {
+                this.loading = false;
                 this.$router.push({name: 'users'});
             }).catch((error) => {
                 //console.log(error.response)
+                this.loading = false;
                 this.allerros = error.response.data.errors;
                 console.log(this.allerros)
           });

@@ -1914,17 +1914,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       status: false,
       user: {},
-      allerros: []
+      allerros: [],
+      loading: false
     };
   },
   methods: {
     addUser: function addUser() {
       var _this = this;
+
+      this.loading = true;
 
       if (this.status) {
         this.user.status = 'active';
@@ -1935,14 +1939,16 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.user);
       var uri = 'http://laravelone.test/api/user/create';
       this.axios.post(uri, this.user).then(function (response) {
+        _this.loading = false;
+
         _this.$router.push({
           name: 'users'
         });
       })["catch"](function (error) {
         //console.log(error.response)
+        _this.loading = false;
         _this.allerros = error.response.data.errors;
         console.log(_this.allerros);
-        _this.success = false;
       });
     }
   }
@@ -1992,12 +1998,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       status: false,
       user: {},
-      allerros: []
+      allerros: [],
+      loading: false
     };
   },
   created: function created() {
@@ -2013,15 +2021,19 @@ __webpack_require__.r(__webpack_exports__);
     updateUser: function updateUser() {
       var _this2 = this;
 
+      this.loading = true;
       this.user.status = this.status === true ? 'active' : 'inactive';
       console.log(this.user);
       var uri = "http://laravelone.test/api/user/update/".concat(this.$route.params.id);
       this.axios.post(uri, this.user).then(function (response) {
+        _this2.loading = false;
+
         _this2.$router.push({
           name: 'users'
         });
       })["catch"](function (error) {
         //console.log(error.response)
+        _this2.loading = false;
         _this2.allerros = error.response.data.errors;
         console.log(_this2.allerros);
       });
@@ -2137,6 +2149,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2146,7 +2160,9 @@ __webpack_require__.r(__webpack_exports__);
         status: 'none',
         first_name: '',
         last_name: ''
-      }
+      },
+      loadingDelete: false,
+      loadingFilter: false
     };
   },
   created: function created() {
@@ -2162,6 +2178,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       console.log(this.filter);
+      this.loadingFilter = true;
       var queryStringParts = new Array();
 
       for (var key in this.filter) {
@@ -2181,9 +2198,12 @@ __webpack_require__.r(__webpack_exports__);
       var uri = 'http://laravelone.test/api/users/filter?' + queryString;
       console.log('URI ', uri);
       this.axios.get(uri).then(function (response) {
-        console.log(response.data);
+        _this2.loadingFilter = false;
         _this2.users = response.data;
         console.log('Users ', _this2.users);
+      })["catch"](function (error) {
+        //console.log(error.response)
+        _this2.loadingFilter = false;
       });
     },
     deleteUser: function deleteUser(id, index) {
@@ -2191,10 +2211,16 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log("id: ", id);
       console.log("index: ", index);
+      this.loadingDelete = true;
       var uri = "http://laravelone.test/api/user/delete/".concat(id);
       this.axios["delete"](uri).then(function (response) {
         //this.users.splice(index, 1);
         _this3.$delete(_this3.users, index);
+
+        _this3.loadingDelete = false;
+      })["catch"](function (error) {
+        //console.log(error.response)
+        _this3.loadingDelete = false;
       });
     },
     showAllUsers: function showAllUsers() {
@@ -20641,9 +20667,9 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm.allerros.firstname
+          _vm.allerros.first_name
             ? _c("small", { staticClass: "form-text text-danger" }, [
-                _vm._v(_vm._s(_vm.allerros.firstname[0]))
+                _vm._v(_vm._s(_vm.allerros.first_name[0]))
               ])
             : _vm._e()
         ]),
@@ -20673,9 +20699,9 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _vm.allerros.lastname
+          _vm.allerros.last_name
             ? _c("small", { staticClass: "form-text text-danger" }, [
-                _vm._v(_vm._s(_vm.allerros.lastname[0]))
+                _vm._v(_vm._s(_vm.allerros.last_name[0]))
               ])
             : _vm._e()
         ]),
@@ -20736,11 +20762,20 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Submit")]
-        )
+        _vm.loading
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { type: "submit", disabled: "" }
+              },
+              [_vm._v("Loading...")]
+            )
+          : _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+              [_vm._v("Submit")]
+            )
       ]
     )
   ])
@@ -20935,11 +20970,20 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Submit")]
-        )
+        _vm.loading
+          ? _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { type: "submit", disabled: "" }
+              },
+              [_vm._v("Loading...")]
+            )
+          : _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+              [_vm._v("Submit")]
+            )
       ]
     )
   ])
@@ -21202,7 +21246,20 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _vm._m(1)
+              _c("div", { staticClass: "col-auto" }, [
+                _vm.loadingFilter
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        attrs: { disabled: "" }
+                      },
+                      [_vm._v("Loading...")]
+                    )
+                  : _c("button", { staticClass: "btn btn-success" }, [
+                      _vm._v("Search")
+                    ])
+              ])
             ])
           ]
         )
@@ -21227,7 +21284,7 @@ var render = function() {
     _c("br"),
     _vm._v(" "),
     _c("table", { staticClass: "table table-hover" }, [
-      _vm._m(2),
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "tbody",
@@ -21261,19 +21318,25 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("td", [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-danger",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.deleteUser(user.id, index)
-                    }
-                  }
-                },
-                [_vm._v("Delete")]
-              )
+              _vm.loadingDelete
+                ? _c(
+                    "button",
+                    { staticClass: "btn btn-danger", attrs: { disabled: "" } },
+                    [_vm._v("Loading...")]
+                  )
+                : _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.deleteUser(user.id, index)
+                        }
+                      }
+                    },
+                    [_vm._v("Delete")]
+                  )
             ])
           ])
         }),
@@ -21289,14 +21352,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-10" }, [
       _c("h1", [_vm._v("Users")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-auto" }, [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Search")])
     ])
   },
   function() {

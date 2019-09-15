@@ -29,7 +29,8 @@
                             <input type="text" class="form-control" placeholder="Last name" v-model="filter.last_name">
                         </div>
                         <div class="col-auto">
-                            <button class="btn btn-success">Search</button>
+                            <button v-if="loadingFilter" class="btn btn-success" disabled>Loading...</button>
+                            <button v-else class="btn btn-success">Search</button>
                         </div>
                     </div>
                 </form>
@@ -59,7 +60,8 @@
                     <td>{{ user.last_name }}</td>
                     <td>{{ user.status=='active'?'Active':'Inactive' }}</td>
                     <td><router-link :to="{name: 'edit', params: { id: user.id }}" class="btn btn-primary">Edit</router-link></td>
-                    <td><button class="btn btn-danger" @click.prevent="deleteUser(user.id, index)">Delete</button></td>
+                    <td><button v-if="loadingDelete" class="btn btn-danger" disabled>Loading...</button>
+                        <button v-else class="btn btn-danger" @click.prevent="deleteUser(user.id, index)">Delete</button></td>
                 </tr>
             </tbody>
         </table>
@@ -76,7 +78,9 @@
                 status:'none',
                 first_name:'',
                 last_name:''
-            }
+            },
+            loadingDelete:false,
+            loadingFilter:false
         }
     },
     created() {
@@ -88,7 +92,7 @@
     methods:{
         filterUsers(){
             console.log(this.filter)
-  
+            this.loadingFilter = true;
             let queryStringParts = new Array();
             for(var key in this.filter) {
 
@@ -108,22 +112,29 @@
             console.log('URI ', uri);
 
             this.axios.get(uri).then(response => {
-                console.log(response.data)
+                this.loadingFilter = false;
                 this.users = response.data;
                 console.log('Users ', this.users)
-            });
+            }).catch((error) => {
+                //console.log(error.response)
+                this.loadingFilter = false;
+          });
             
         },
 
         deleteUser(id, index){
             console.log("id: ", id)
             console.log("index: ", index)
-            
+            this.loadingDelete = true;
             let uri = `http://laravelone.test/api/user/delete/${id}`;
             this.axios.delete(uri).then(response => {
                 //this.users.splice(index, 1);
                 this.$delete(this.users, index)
-            });
+                this.loadingDelete = false;
+            }).catch((error) => {
+                //console.log(error.response)
+                this.loadingDelete = false;
+          });
             
         },
 
