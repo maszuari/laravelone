@@ -1,10 +1,10 @@
 <?php
 namespace App\Filters;
 
-class EmailFilter
+class LastNameFilter
 {
     public function filter($builder, $value)
     {
-        return $builder->where('email', $value);
+        return $builder->where('lastname', $value);
     }
 }

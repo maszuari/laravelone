@@ -10,6 +10,14 @@ class UserController extends Controller
 {
     public function store(Request $request)
     {
+
+      $request->validate([
+          'email' => 'required|email:rfc,dns',
+          'firstname' => 'required',
+          'lastname' => 'required',
+          'status' => 'required'
+      ]);
+
       $user = new User([
         'email' => $request->get('email'),
         'firstname' => $request->get('firstname'),
@@ -34,6 +42,14 @@ class UserController extends Controller
 
     public function update($id, Request $request)
     {
+      $request->validate([
+          'id' => 'required',
+          'email' => 'required|email:rfc,dns',
+          'firstname' => 'required',
+          'lastname' => 'required',
+          'status' => 'required'
+      ]);
+
       $user = User::find($id);
       $user->update($request->all());
       return response()->json('successfully updated');
@@ -44,5 +60,11 @@ class UserController extends Controller
       $user = User::find($id);
       $user->delete();
       return response()->json('successfully deleted');
+    }
+
+    public function filter(Request $request)
+    {
+      //print_r($request->get('email'));
+      return User::filter($request)->get();
     }
 }

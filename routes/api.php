@@ -22,3 +22,4 @@ Route::get('/user/edit/{id}', 'UserController@edit');
 Route::post('/user/update/{id}', 'UserController@update');
 Route::delete('/user/delete/{id}', 'UserController@delete');
 Route::get('/users', 'UserController@index');
+Route::get('/users/filter', 'UserController@filter')->name('users');
