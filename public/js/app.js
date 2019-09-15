@@ -2052,8 +2052,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -20968,23 +20966,61 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-md-8 text-center" }, [
+      _c("p", [
+        _vm._v(
+          "This is a demo of CRUD project that uses Vue.js, Laravel and MySQL."
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v("To begin, simply click one of below buttons")]),
+      _vm._v(" "),
+      _c(
+        "p",
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { to: { name: "create" } }
+            },
+            [_vm._v("Create User")]
+          ),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-secondary",
+              attrs: { to: { name: "users" } }
+            },
+            [_vm._v("Show All Users")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm._m(0)
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card card-default" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("Home component")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _vm._v("\n                This is a Home component.\n            ")
-          ])
-        ])
-      ])
+    return _c("p", { staticClass: "text-monospace" }, [
+      _vm._v("Developed by: "),
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "https://www.linkedin.com/in/maszuari/",
+            target: "_blank"
+          }
+        },
+        [_vm._v("Maszuari")]
+      )
     ])
   }
 ]
