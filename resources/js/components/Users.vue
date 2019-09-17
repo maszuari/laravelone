@@ -53,7 +53,7 @@
             </tr>
             </thead>
             <tbody>
-                <tr v-for="(user, index) in users" :key="user.id">
+                <tr v-for="(user, index) in users.data" :key="user.id">
                     <td>{{ user.id }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.first_name }}</td>
@@ -65,6 +65,7 @@
                 </tr>
             </tbody>
         </table>
+        <pagination :data="users" @pagination-change-page="getUsers"></pagination>
   </div>
 </template>
 
@@ -72,7 +73,7 @@
   export default {
     data() {
         return {
-            users: [],
+            users: {},
             filter:{
                 email:'',
                 status:'none',
@@ -84,12 +85,22 @@
         }
     },
     created() {
-        let uri = 'http://laravelone.test/api/users';
-        this.axios.get(uri).then(response => {
-            this.users = response.data.data;
-        });
+       this.getUsers();
     },
     methods:{
+
+        getUsers(page){
+
+            if (typeof page === 'undefined') {
+                page = 1;
+            }
+
+            let uri = 'http://laravelone.test/api/users?page=' + page;
+            this.axios.get(uri).then(response => {
+                this.users = response.data;
+            });
+        },
+
         filterUsers(){
             console.log(this.filter)
             this.loadingFilter = true;

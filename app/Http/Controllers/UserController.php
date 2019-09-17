@@ -31,7 +31,9 @@ class UserController extends Controller
 
     public function index()
     {
-      return new UserCollection(User::all());
+      $data = User::paginate(10);
+      return new UserCollection($data);
+      //return response()->json($data);
     }
 
     public function edit($id)
